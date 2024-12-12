@@ -1,2 +1,2 @@
-# ar-biz-cards
-Dynamic business cards using AR technology.
+# ar-samauma-tech
+Cartão de visita desenvolvido para o projeto SamaúmaTech (UNIFAP).
