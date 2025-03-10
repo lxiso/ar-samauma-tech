@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> <!-- "head" configura as partes de metadados e configurações (backend) da página. -->
+        <meta charset="UTF-8">
+        <title>Teste</title> <!-- Nome da aba no navegador. -->
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script> <!-- Scripts necessários para a execução da realidade aumentada -->
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script> <!-- Scripts necessários para a execução da realidade aumentada -->
+    </head>
+
+    <body style="margin: 0; overflow: hidden;"> <!-- "body" configura a parte visual (frontend) da página. -->
+        <a-scene embedded arjs emitevents="true" renderer="antialias: true; logarithmicDepthBuffer: true;"> <!-- Inicia uma cena 3D AR.js. -->
+            <a-entity camera></a-entity> <!-- Cria uma instância de uma câmera. -->
+            <a-marker preset="hiro" id="marker" emitevents="true"> <!-- Cria uma instância de um marcador padrão estilo "Hiro". -->
+                <a-entity id="character" gltf-model="testDummy.glb" animation-mixer></a-entity> <!-- Vincula o modelo 3D "testDummy.glb" ao id "#character". -->
+                <a-entity gltf-model="#character" animation-mixer autoplay="true"></a-entity> <!-- Cria um objeto #character. -->
+            </a-marker>
+            <a-marker type="pattern" url="/markers/pattern.patt" emitevents="true">
+                <a-entity id="characterTwo" gltf-model="testDummy.glb" animation-mixer></a-entity> <!-- Vincula o modelo 3D "testDummy.glb" ao id "#characterTwo". -->
+                <a-entity gltf-model="#characterTwo" animation-mixer autoplay="true"></a-entity> <!-- Cria um objeto #characterTwo. -->
+            </a-marker>
+            <script> 
+                // Tudo que se encontra dentro de "script" é código em Javascript que rodará dentro da página.
+                document.addEventListener('DOMContentLoaded', function(){ //Adiciona um evento para acontecer quando todo o conteúdo tiver carregado.
+                    const charOne = document.querySelector('#character'); //Cria uma constante armazenando #character.
+                    const charTwo = document.querySelector('#characterTwo'); //Cria uma constante armazenando #characterTwo.
+                    const idleAnim = 'clip:idle; crossFadeDuration: 0.5'; //No modelo exemplo, há duas animações, nesta linha e na seguinte, armazenamos ambas em constantes.
+                    const wavingAnim = 'clip:waving; crossFadeDuration: 1';
+                    charOne.setAttribute('animation-mixer', idleAnim); //Utilizamos a função "setAttribute" em "charOne" para definir a animação "idle".
+                    charTwo.setAttribute('animation-mixer', wavingAnim); //Utilizamos a função "setAttribute" em "charTwo" para definir a animação "waving"
+                })
+            </script>
+        </a-scene>
+    </body>
+</html>

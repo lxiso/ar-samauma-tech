@@ -7,7 +7,7 @@
         <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
         <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
-        </head>
+    </head>
 
     <body style="margin: 0; overflow: hidden;">
         <a-scene embedded arjs emitevents="true" renderer="antialias: true; logarithmicDepthBuffer: true;">
@@ -62,25 +62,19 @@
                             const objOnePos = new THREE.Vector3().setFromMatrixPosition(objOne.object3D.matrixWorld);
                             const objTwoPos = new THREE.Vector3().setFromMatrixPosition(objTwo.object3D.matrixWorld);
             
-                            // Debugging: Print positions to console
-                            console.log('Object One Position:', objOnePos);
-                            console.log('Object Two Position:', objTwoPos);
-            
                             // Update animations
                             objOne.setAttribute('animation-mixer', wavingAnim);
                             objTwo.setAttribute('animation-mixer', wavingAnim);
             
-                            // Interpolate rotations
-                            interpolateRotation(objOne, objTwoPos, 0.1); // Adjust deltaTime for smoothness
+                            // Make objOne look at objTwo
+                            interpolateRotation(objOne, objTwoPos, 0.1);
+            
+                            // Make objTwo look at objOne
                             interpolateRotation(objTwo, objOnePos, 0.1);
                         } else {
                             // Switch to idle animations
                             objOne.setAttribute('animation-mixer', idleAnim);
                             objTwo.setAttribute('animation-mixer', idleAnim);
-            
-                            // Debugging: Log visibility states
-                            console.log('Marker One Visible:', markerOneVisible);
-                            console.log('Marker Two Visible:', markerTwoVisible);
                         }
                     }
             
